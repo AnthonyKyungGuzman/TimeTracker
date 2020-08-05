@@ -1,7 +1,8 @@
 import os, re, sys, time
 from subprocess import PIPE, Popen
 
-dictionay = {'Nautilus':'File Manager','X-terminal-emulator':'Terminal','Code':'Visual Studio','Google-chrome':'Google-Chrome'}
+window_dictionary = {'Nautilus':'File Manager','X-terminal-emulator':'Terminal','Code':'Visual Studio','Google-chrome':'Google-Chrome'}
+websites_dictionary = {'Overleaf, Editor de LaTeX online ':'Overleaf','Buscar con Google ':'Google Search','gmail.com ':'Gmail'}
 
 def get_current_window():
 
@@ -30,17 +31,36 @@ def get_current_window():
             processname2 = processname2.strip( '"' )
 
         try:
-            processname2 = dictionay[processname2]
+            processname2 = window_dictionary[processname2]
         except:
-            dictionay[processname2] = processname2
-        return processname2
+            window_dictionary[processname2] = processname2
+       
+        return processname2, windowname
 
     return None
 
+def get_chrome_website(website):
+    string_list = website.split('-')
+    string_split_list = string_list[1].split(' ',1)
+    try:
+        new_split_list = string_split_list[1].split('@')
+        new_split_list = new_split_list[0] if len(new_split_list) < 2 else new_split_list[1]
+        string_split_list[1] = websites_dictionary[new_split_list]
+    except:
+        websites_dictionary[string_split_list[1]] = string_split_list[1]
+    return string_split_list[1]
+
+
+
 
 if __name__ == '__main__':
-     while True:
-        a = get_current_window()
-        print(a )
-        time.sleep(2)
+    previous_window = None
+    while True:
+        a,windowname = get_current_window()
+        if(previous_window != a):
+            previous_window = a
+            print(a )
+            if(a == 'Google-Chrome'):
+                print(get_chrome_website(windowname))
+        time.sleep(1)
    
