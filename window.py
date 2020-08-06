@@ -5,8 +5,8 @@ import platform
 os_platform = platform.system()
 if(os_platform == 'Windows'):
     from win32gui import GetWindowText, GetForegroundWindow
-    microsoft_windows_list = ['Microsoft Teams', 'Prompt','Outlook','Google Chrome','Task Switching','Visual Studio Code']
-    microsfft_chrome_list = ['Google Calendar']
+    microsoft_windows_list = ['Microsoft Teams', 'Prompt','Outlook','Google Chrome','Task Switching','Visual Studio Code','Word','Skype']
+    microsft_chrome_list = ['Google Calendar']
 
 window_dictionary = {'Nautilus':'File Manager','X-terminal-emulator':'Terminal','Code':'Visual Studio','Google-chrome':'Google-Chrome'}
 websites_dictionary = {'Overleaf, Editor de LaTeX online ':'Overleaf','Buscar con Google ':'Google Search','gmail.com ':'Gmail'}
@@ -50,10 +50,10 @@ def get_current_window():
 
 def get_chrome_website(website):
     if(os_platform == 'Windows'):
-        for i in microsfft_chrome_list:
-            website_in_list  = i in website
+        for url_website in microsft_chrome_list:
+            website_in_list  = url_website in website
             if(website_in_list):
-                return i
+                return url_website
     string_list = website.split('-')
     string_split_list = string_list[1].split(' ',1)
     try:
@@ -66,10 +66,10 @@ def get_chrome_website(website):
 
 
 def get_microsoft_current_window(window_name):
-    for i in microsoft_windows_list:
-        window_in_list  = i in window_name
+    for window in microsoft_windows_list:
+        window_in_list  = window in window_name
         if(window_in_list):
-            return i
+            return window
     return 'Other'
 
 
