@@ -9,7 +9,8 @@ if(os_platform == 'Windows'):
     microsft_chrome_list = ['Google Calendar']
 
 window_dictionary = {'Nautilus':'File Manager','X-terminal-emulator':'Terminal','Code':'Visual Studio','Google-chrome':'Google-Chrome'}
-websites_dictionary = {'Overleaf, Editor de LaTeX online ':'Overleaf','Buscar con Google ':'Google Search','gmail.com ':'Gmail'}
+websites_dictionary = {'Overleaf, Editor de LaTeX online ':'Overleaf','Buscar con Google ':'Google Search','gmail.com ':'Gmail','Google Chrome':'Other','Overleaf':'Overleaf','Stack Overflow':'Stack Overflow'}
+linux_chrome_list = ['Buscar con Google ', 'Overleaf','gmail.com ','Stack Overflow']
 
 def get_current_window():
     if('Windows'==os_platform):
@@ -54,6 +55,13 @@ def get_chrome_website(website):
             website_in_list  = url_website in website
             if(website_in_list):
                 return url_website
+    else: 
+        for url_website in linux_chrome_list:
+            website_in_list  = url_website in website
+            if(website_in_list):
+                url_website = websites_dictionary[url_website]
+                return url_website
+        
     string_list = website.split('-')
     string_split_list = string_list[1].split(' ',1)
     try:
