@@ -14,12 +14,16 @@ activity_url = None
 listOfActivities = ActivityList([])
 listOfChromActivities = ActivityList([])
 
+os_activities = ActivitySummary([])
+chrome_activities = ActivitySummary([])
+
 try:
     listOfActivities.initialize_me()
     listOfChromActivities.initialize_me()
 except Exception:
-    print('No json')
+    print('')
 
+counter = 0
 
 if __name__ == '__main__':
    
@@ -59,18 +63,31 @@ if __name__ == '__main__':
                     else:
                         activity = Activity(activity_window, [time_entry])
                         listOfActivities.activities.append(activity)
+                    counter = 1 +counter
 
-
-                with open('activities.json', 'w') as json_file:
-                    listForJson = ActivityList([]) 
-                    listForJson.activities = listOfActivities.activities.copy()
-                    listForJson.activities.append(listOfChromActivities)
-                    json.dump(listForJson.serialize(), json_file,indent=4, sort_keys=True) 
+                with open('os_activity.json', 'w') as json_file:
+                    json.dump(listOfActivities.serialize(), json_file,indent=4, sort_keys=True) 
+                with open('chrome_activity.json', 'w') as json_file:
+                    json.dump(listOfChromActivities.serialize(), json_file,indent=4, sort_keys=True) 
 
                 start_time = datetime.datetime.now()
             first_time = False
             previous_url = url
             previous_window = window_name
             
-
+        if(counter == 5):
+            break
         time.sleep(1)
+
+    os_activities = os_activities.open_os()
+    os_activities.get_total_time_per_activity()
+    
+    #chrome_activities = chrome_activities.open_chrome()
+    #print(chrome_activities)
+
+    print("Getting the total time of the activity")
+
+    
+    print(os_activities)
+    
+

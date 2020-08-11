@@ -1,0 +1,66 @@
+{
+    "activities": [
+        {
+            "name": "Terminal",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                },
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 1
+                },
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                },
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                }
+            ]
+        },
+        {
+            "name": "Visual Studio",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                }
+            ]
+        },
+        {
+            "name": "Gedit",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                }
+            ]
+        },
+        {
+            "name": "File Manager",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                }
+            ]
+        }
+    ]
+}
