@@ -7,13 +7,14 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 18
-                }
-            ]
-        },
-        {
-            "name": "moviEclipse",
-            "time_entries": [
+                    "seconds": 3
+                },
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 3
+                },
                 {
                     "days": 0,
                     "hours": 0,
@@ -29,7 +30,13 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 2
+                    "seconds": 1
+                },
+                {
+                    "days": 0,
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 1
                 }
             ]
         },
@@ -40,7 +47,7 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 3
+                    "seconds": 8
                 }
             ]
         },

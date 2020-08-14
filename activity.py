@@ -115,6 +115,7 @@ class Activity:
                 total_time.hours =  total_time.hours - 24 
                 total_time.days = total_time.days + 1
         self.time_entries = [total_time]
+    
 
 class TimeEntry:
     def __init__(self, start_time, end_time, days, hours, minutes, seconds):
@@ -151,71 +152,33 @@ class TimeEntry:
 class ActivitySummary(ActivityList):
     def __init__(self, activities):
         self.activities = activities
-    
-    def initialize_daily(self):
+
+    def open_file(self,file_name):
         activity_list = ActivitySummary([])
-        with open('daily_activity.json', 'r') as f:
+        with open(file_name, 'r') as f:
             data = json.load(f)
             activity_list = ActivitySummary(
                 activities = self.get_activities_from_json(data)
             )
         return activity_list
     
-    def get_activities_from_json(self, data):
-        return_list = []
-        for activity in data['activities']:
-            return_list.append(
-                Activity(
-                    name = activity['name'],
-                    time_entries = self.get_time_entires_from_json(activity),
-                )
-            )
-        self.activities = return_list
-        return return_list
-    
-    def get_time_entires_from_json(self, data):
-        return_list = []
-        for entry in data['time_entries']:
-            return_list.append(
-                TimeEntry(
-                    start_time = 0,
-                    end_time = 0,
-                    days = entry['days'],
-                    hours = entry['hours'],
-                    minutes = entry['minutes'],
-                    seconds = entry['seconds'],
-                )
-            )
-        self.time_entries = return_list
-        return return_list
-
-
-    def serialize(self):
-        return {
-            'activities' : self.activities_to_json()
-        }
-    
-    def activities_to_json(self):
-        activities_ = []
+    def merge_files_time(self,list_of_activities): #open in greater file example week file receives daily list of activities
         for activity in self.activities:
-            activities_.append(activity.serialize())
-        
-        return activities_
-     
-    def open_os(self):
-        activity_list = ActivitySummary([])
-        with open('os_activity.json', 'r') as f:
-            data = json.load(f)
-            activity_list = ActivitySummary(
-                activities = self.get_activities_from_json(data)
-            )
-        return activity_list 
-        
-    def open_chrome(self):
-        activity_list = ActivitySummary([])
-        with open('chrome_activity.json', 'r') as f:
-            data = json.load(f)
-            activity_list = ActivitySummary(
-                activities = self.get_activities_from_json(data)
-            )
-        return activity_list 
+            for other_activity in list_of_activities.activities:
+                if(activity.name == other_activity.name):
+                    activity.time_entries[0].seconds = activity.time_entries[0].seconds + other_activity.time_entries[0].seconds
+                    activity.time_entries[0].minutes = activity.time_entries[0].minutes + other_activity.time_entries[0].minutes
+                    activity.time_entries[0].hours = activity.time_entries[0].hours + other_activity.time_entries[0].hours
+                    activity.time_entries[0].days = activity.time_entries[0].days + other_activity.time_entries[0].days
+                    if(activity.time_entries[0].seconds >= 60):
+                        activity.time_entries[0].seconds = activity.time_entries[0].seconds - 60
+                        activity.time_entries[0].minutes = activity.time_entries[0].minutes + 1
+                    if(activity.time_entries[0].minutes >= 60):
+                        activity.time_entries[0].minutes = activity.time_entries[0].minutes - 60
+                        activity.time_entries[0].hours = activity.time_entries[0].hours + 1
+                    if(activity.time_entries[0].hours >= 24):
+                        activity.time_entries[0].hours =  activity.time_entries[0].hours - 24 
+                        activity.time_entries[0].days = activity.time_entries[0].days + 1
+
+
+            

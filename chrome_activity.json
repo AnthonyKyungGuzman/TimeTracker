@@ -1,15 +1,3 @@
 {
-    "activities": [
-        {
-            "name": "Other",
-            "time_entries": [
-                {
-                    "days": 0,
-                    "hours": 0,
-                    "minutes": 0,
-                    "seconds": 2
-                }
-            ]
-        }
-    ]
+    "activities": []
 }

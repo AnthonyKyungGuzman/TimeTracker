@@ -5,9 +5,9 @@
             "time_entries": [
                 {
                     "days": 0,
-                    "hours": 0,
-                    "minutes": 0,
-                    "seconds": 18
+                    "hours": 3,
+                    "minutes": 50,
+                    "seconds": 0
                 }
             ]
         },
@@ -18,7 +18,7 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 2
+                    "seconds": 1
                 }
             ]
         },
@@ -29,18 +29,7 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 2
-                }
-            ]
-        },
-        {
-            "name": "Gedit",
-            "time_entries": [
-                {
-                    "days": 0,
-                    "hours": 0,
-                    "minutes": 0,
-                    "seconds": 3
+                    "seconds": 1
                 }
             ]
         },
@@ -51,7 +40,7 @@
                     "days": 0,
                     "hours": 0,
                     "minutes": 0,
-                    "seconds": 2
+                    "seconds": 1
                 }
             ]
         }

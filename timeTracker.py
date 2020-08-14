@@ -17,11 +17,6 @@ listOfChromActivities = ActivityList([])
 os_activities = ActivitySummary([])
 chrome_activities = ActivitySummary([])
 
-try:
-    listOfActivities.initialize_me()
-    listOfChromActivities.initialize_me()
-except Exception:
-    print('')
 
 counter = 0
 
@@ -79,15 +74,21 @@ if __name__ == '__main__':
             break
         time.sleep(1)
 
-    os_activities = os_activities.open_os()
-    os_activities.get_total_time_per_activity()
-    
-    #chrome_activities = chrome_activities.open_chrome()
-    #print(chrome_activities)
+    os_activities = os_activities.open_file('os_activity.json')
+    os_activities.get_total_time_per_activity() #getting the total time of the day 
+    chrome_activities = chrome_activities.open_file('chrome_activity.json')
+    chrome_activities.get_total_time_per_activity()
 
-    print("Getting the total time of the activity")
-
-    
     print(os_activities)
+    with open('os_activity.json', 'w') as json_file:
+        json.dump(os_activities.serialize(), json_file,indent=4, sort_keys=True)
+
+    daily_activities = ActivitySummary([])
+    daily_activities = daily_activities.open_file('daily_os_activity.json')
+    daily_activities.merge_files_time(os_activities)
+    print("Merging times")
+    print(daily_activities)
+
+
     
 
