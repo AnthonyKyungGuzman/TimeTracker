@@ -14,12 +14,11 @@ activity_url = None
 listOfActivities = ActivityList([])
 listOfChromActivities = ActivityList([])
 
-try:
-    listOfActivities.initialize_me()
-    listOfChromActivities.initialize_me()
-except Exception:
-    print('No json')
+os_activities = ActivitySummary([])
+chrome_activities = ActivitySummary([])
 
+
+counter = 0
 
 if __name__ == '__main__':
    
@@ -59,18 +58,39 @@ if __name__ == '__main__':
                     else:
                         activity = Activity(activity_window, [time_entry])
                         listOfActivities.activities.append(activity)
+                    counter = 1 +counter
 
-
-                with open('activities.json', 'w') as json_file:
-                    listForJson = ActivityList([]) 
-                    listForJson.activities = listOfActivities.activities.copy()
-                    listForJson.activities.append(listOfChromActivities)
-                    json.dump(listForJson.serialize(), json_file,indent=4, sort_keys=True) 
+                with open('os_activity.json', 'w') as json_file:
+                    json.dump(listOfActivities.serialize(), json_file,indent=4, sort_keys=True) 
+                with open('chrome_activity.json', 'w') as json_file:
+                    json.dump(listOfChromActivities.serialize(), json_file,indent=4, sort_keys=True) 
 
                 start_time = datetime.datetime.now()
             first_time = False
             previous_url = url
             previous_window = window_name
             
-
+        if(counter == 5):
+            break
         time.sleep(1)
+
+    os_activities = os_activities.open_file('os_activity.json')
+    os_activities.get_total_time_per_activity() #getting the total time of the day 
+    chrome_activities = chrome_activities.open_file('chrome_activity.json')
+    chrome_activities.get_total_time_per_activity()
+
+    print(os_activities)
+    with open('os_activity.json', 'w') as json_file:
+        json.dump(os_activities.serialize(), json_file,indent=4, sort_keys=True)
+
+    daily_activities = ActivitySummary([])
+    daily_activities = daily_activities.open_file('daily_os_activity.json')
+    daily_activities.merge_files(os_activities)
+    print("Merging times")
+    print(daily_activities)
+
+    with open('daily_os_activity.json', 'w') as json_file:
+        json.dump(daily_activities.serialize(), json_file,indent=4, sort_keys=True) 
+
+    
+
